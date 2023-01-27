@@ -64,6 +64,6 @@ export class Character {
             throw new CharacterParseError(`"${value}" isn't a valid JSON.`);
         }
 
-        return new Character(data?._name);
+        return new Character(data?._name, data?._skills);
     }
 }
