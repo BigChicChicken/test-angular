@@ -6,7 +6,7 @@
 
 <form class='flex flex-col gap-4' [formGroup]="characterForm" (ngSubmit)="onSubmit()">
     <app-text-input formControlName='name' id='name' label='Name'/>
-    <div formGroupName="skills">
+    <div class='grid grid-cols-2 gap-8' formGroupName="skills">
         <app-number-input formControlName='intelligence' id='intelligence' label='Intelligence' [min]='3'/>
         <app-number-input formControlName='reflexes' id='reflexes' label='Reflexes' [min]='3'/>
         <app-number-input formControlName='dexterity' id='dexterity' label='Dexterity' [min]='3'/>
