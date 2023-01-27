@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  height: 100%;
+  background-image: linear-gradient(to bottom, #2e0d10, #250d1a, #190e1c, #0c0e18, #050b10);
+}

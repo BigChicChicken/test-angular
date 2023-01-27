@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  node:
+    build:
+      context: ./.docker/node
+    volumes:
+      - ./app/:/home/node/app/
+    ports:
+      - "4200:4200"
