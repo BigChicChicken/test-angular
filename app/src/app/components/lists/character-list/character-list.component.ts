@@ -2,6 +2,7 @@ import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { CharacterStorageService } from '../../../services/character-storage/character-storage.service';
 import { Character } from '../../../entities/character/character';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { map } from 'rxjs';
 
 @Component({
     selector: 'app-character-list',
@@ -41,17 +42,17 @@ export class CharacterListComponent
     @Input() label?: string;
     input = '';
     characters: Character[] = [];
-    onChange = (event: any) => {};
-    onTouched = () => {};
+    onChange: any;
+    onTouched: any;
 
     constructor(private characterStorageService: CharacterStorageService) {}
 
     ngOnInit(): void {
-        this.characterStorageService.subject.subscribe(
-            (characters: Character[]) => {
+        this.characterStorageService.subject
+            .pipe(map((storage) => Object.values(storage)))
+            .subscribe((characters: Character[]) => {
                 this.characters = characters;
-            }
-        );
+            });
     }
 
     ngOnDestroy(): void {
@@ -66,7 +67,7 @@ export class CharacterListComponent
         this.onTouched = fn;
     }
 
-    writeValue(input: any) {
+    writeValue(input: string) {
         this.input = input;
     }
 }

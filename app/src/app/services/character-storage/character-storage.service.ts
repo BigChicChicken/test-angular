@@ -2,44 +2,50 @@ import { BehaviorSubject } from 'rxjs';
 import { Character } from '../../entities/character/character';
 import { Injectable } from '@angular/core';
 
+export interface CharacterStorageInterface {
+    [key: string]: Character;
+}
+
 @Injectable({
     providedIn: 'root',
 })
 export class CharacterStorageService {
     static STORAGE_KEY = 'CHARACTERS';
 
-    private readonly _subject: BehaviorSubject<Character[]>;
-    private readonly _characters: Character[];
+    private readonly _subject: BehaviorSubject<CharacterStorageInterface>;
+    private readonly _storage: CharacterStorageInterface;
 
     constructor() {
-        this._characters = this.readStorage();
-        this._subject = new BehaviorSubject<Character[]>(this._characters);
+        this._storage = this.readStorage();
+        this._subject = new BehaviorSubject<CharacterStorageInterface>(
+            this._storage
+        );
         this._subject.subscribe(this.saveStorage);
     }
 
-    private readStorage(): Character[] {
+    private readStorage(): CharacterStorageInterface {
         let data;
         try {
             data = JSON.parse(
-                localStorage.getItem(CharacterStorageService.STORAGE_KEY) ?? ''
+                localStorage.getItem(CharacterStorageService.STORAGE_KEY) ??
+                    '{}'
             );
         } catch (e) {
             data = false;
         }
 
-        if (Array.isArray(data)) {
-            return data.map((item) => Character.fromJson(item));
-        }
-
-        return [];
+        return Object.fromEntries(
+            Object.entries(data).map(([key, character]) => [
+                key,
+                Object.assign(new Character(), character),
+            ])
+        );
     }
 
-    private saveStorage(characters: Character[]): void {
+    private saveStorage(storage: CharacterStorageInterface): void {
         localStorage.setItem(
             CharacterStorageService.STORAGE_KEY,
-            JSON.stringify(
-                characters.map((character: Character) => character.toJson())
-            )
+            JSON.stringify(storage)
         );
     }
 
@@ -48,7 +54,7 @@ export class CharacterStorageService {
     }
 
     push(character: Character): void {
-        this._characters.push(character);
-        this._subject.next(this._characters);
+        this._storage[character.id] = character;
+        this._subject.next(this._storage);
     }
 }

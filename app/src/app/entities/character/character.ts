@@ -1,4 +1,5 @@
 import { CharacterParseError } from '../../errors/character-parse/character-parse.error';
+import { v4 as uuid } from 'uuid';
 
 export enum Skills {
     Intelligence = 'intelligence',
@@ -14,23 +15,28 @@ export enum Skills {
 }
 
 export class Character {
-    private _version = '1.0';
+    private readonly _id: string = uuid();
+    private readonly _version: string = '1.0';
 
     constructor(
         private _name: string = '',
         private _skills: { [key in Skills]: number } = {
-            [Skills.Intelligence]: 3,
-            [Skills.Reflexes]: 3,
-            [Skills.Dexterity]: 3,
-            [Skills.Technique]: 3,
-            [Skills.Cool]: 3,
-            [Skills.Will]: 3,
-            [Skills.Luck]: 3,
-            [Skills.Movement]: 3,
-            [Skills.Body]: 3,
-            [Skills.Empathy]: 3,
+            [Skills.Intelligence]: 2,
+            [Skills.Reflexes]: 2,
+            [Skills.Dexterity]: 2,
+            [Skills.Technique]: 2,
+            [Skills.Cool]: 2,
+            [Skills.Will]: 2,
+            [Skills.Luck]: 2,
+            [Skills.Movement]: 2,
+            [Skills.Body]: 2,
+            [Skills.Empathy]: 2,
         }
     ) {}
+
+    get id(): string {
+        return this._id;
+    }
 
     get version(): string {
         return this._version;
@@ -52,10 +58,6 @@ export class Character {
         this._skills = skills;
     }
 
-    toJson(): string {
-        return JSON.stringify(this);
-    }
-
     static fromJson(value: string): Character {
         let data = [];
         try {
@@ -64,6 +66,9 @@ export class Character {
             throw new CharacterParseError(`"${value}" isn't a valid JSON.`);
         }
 
-        return new Character(data?._name, data?._skills);
+        const character = new Character(data?._name, data?._skills);
+        Object.assign(character, { _id: data?._id, _version: data?._version });
+
+        return character;
     }
 }
