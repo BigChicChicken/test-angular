@@ -1,0 +1,20 @@
+{
+    "locale": "fr",
+    "translations": {
+        "button.reset": "Réinitialisation",
+        "character.editor.title": "Créer votre personnage",
+        "character.editor.load": "Charger un personnage",
+        "character.editor.name": "Nom",
+        "skill.intelligence": "Intelligence",
+        "skill.reflexes": "Réflexes",
+        "skill.dexterity": "Dextérité",
+        "skill.technique": "Technique",
+        "skill.cool": "Prestance",
+        "skill.will": "Volonté",
+        "skill.luck": "Chance",
+        "skill.movement": "Mouvement",
+        "skill.body": "Corps",
+        "skill.empathy": "Empathie",
+        "character.editor.submit": "Sauvegarde"
+    }
+}

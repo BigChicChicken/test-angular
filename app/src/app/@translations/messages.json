@@ -1,0 +1,20 @@
+{
+    "locale": "en-US",
+    "translations": {
+        "button.reset": "Reset",
+        "character.editor.title": "Create your character",
+        "character.editor.load": "Load a character",
+        "character.editor.name": "Name",
+        "skill.intelligence": "Intelligence",
+        "skill.reflexes": "Reflexes",
+        "skill.dexterity": "Dexterity",
+        "skill.technique": "Technique",
+        "skill.cool": "Cool",
+        "skill.will": "Will",
+        "skill.luck": "Luck",
+        "skill.movement": "Movement",
+        "skill.body": "Body",
+        "skill.empathy": "Empathy",
+        "character.editor.submit": "Save"
+    }
+}

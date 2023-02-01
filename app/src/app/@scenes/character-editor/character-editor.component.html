@@ -1,0 +1,26 @@
+<h1 class="font-bold text-4xl text-primary text-center uppercase mb-4">
+    <app-translator i18n-key='@@character.editor.title' key='Create your character' />
+</h1>
+
+<div class='mb-10'>
+    <app-character-list [formControl]='characterList' id='load' i18n-label='@@character.editor.load' label='Load a character' (change)="loadCharacter()" />
+</div>
+
+<form class='flex flex-col gap-4' [formGroup]="characterForm" (ngSubmit)="onSubmit()">
+    <app-text-input formControlName='name' id='name' i18n-label='@@character.editor.name' label='Name'/>
+    <div class='grid grid-cols-2 gap-8' formGroupName="skills">
+        <app-number-input formControlName='intelligence' id='intelligence' i18n-label='@@skill.intelligence' label='Intelligence' [min]='3'/>
+        <app-number-input formControlName='reflexes' id='reflexes' i18n-label='@@skill.reflexes' label='Reflexes' [min]='3'/>
+        <app-number-input formControlName='dexterity' id='dexterity' i18n-label='@@skill.dexterity' label='Dexterity' [min]='3'/>
+        <app-number-input formControlName='technique' id='technique' i18n-label='@@skill.technique' label='Technique' [min]='3'/>
+        <app-number-input formControlName='cool' id='cool' i18n-label='@@skill.cool' label='Cool' [min]='3'/>
+        <app-number-input formControlName='will' id='will' i18n-label='@@skill.will' label='Will' [min]='3'/>
+        <app-number-input formControlName='luck' id='luck' i18n-label='@@skill.luck' label='Luck' [min]='3'/>
+        <app-number-input formControlName='movement' id='movement' i18n-label='@@skill.movement' label='Movement' [min]='3'/>
+        <app-number-input formControlName='body' id='body' i18n-label='@@skill.body' label='Body' [min]='3'/>
+        <app-number-input formControlName='empathy' id='empathy' i18n-label='@@skill.empathy' label='Empathy' [min]='3'/>
+    </div>
+
+    <app-submit-button i18n-label='@@character.editor.submit' label='Save'/>
+    <app-reset-button (click)='characterForm.reset()' />
+</form>
