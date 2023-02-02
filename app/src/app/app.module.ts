@@ -13,6 +13,7 @@ import { SubmitButtonComponent } from './@components/@buttons/submit-button/subm
 import { TextInputComponent } from './@components/@inputs/text-input/text-input.component';
 import { TranslatorComponent } from './@components/translator/translator.component';
 import { SwitchLocaleComponent } from './@components/switch-locale/switch-locale.component';
+import { RoleListComponent } from './@components/@lists/role-list/role-list.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { SwitchLocaleComponent } from './@components/switch-locale/switch-locale
         TextInputComponent,
         TranslatorComponent,
         SwitchLocaleComponent,
+        RoleListComponent,
     ],
     imports: [BrowserModule, FormsModule, ReactiveFormsModule],
     providers: [],

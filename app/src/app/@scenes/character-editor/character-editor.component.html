@@ -8,7 +8,8 @@
 
 <form class='flex flex-col gap-4' [formGroup]="characterForm" (ngSubmit)="onSubmit()">
     <app-text-input formControlName='name' id='name' i18n-label='@@character.editor.name' label='Name'/>
-    <div class='grid grid-cols-2 gap-8' formGroupName="skills">
+    <app-role-list formControlName='role' id='role' i18n-label='@@character.editor.role' label='Role' />
+    <div class='grid grid-cols-1 md:grid-cols-2 gap-8' formGroupName="skills">
         <app-number-input formControlName='intelligence' id='intelligence' i18n-label='@@skill.intelligence' label='Intelligence' [min]='3'/>
         <app-number-input formControlName='reflexes' id='reflexes' i18n-label='@@skill.reflexes' label='Reflexes' [min]='3'/>
         <app-number-input formControlName='dexterity' id='dexterity' i18n-label='@@skill.dexterity' label='Dexterity' [min]='3'/>

@@ -1,5 +1,5 @@
 import { FormControl, FormGroup } from '@angular/forms';
-import { Character, Skills } from '../../@entities/character/character';
+import { Character, Skill } from '../../@entities/character/character';
 
 export const defaultCharacter = new Character();
 
@@ -9,9 +9,10 @@ export class CharacterForm extends FormGroup {
     constructor(private _character: Character = defaultCharacter) {
         super({
             name: new FormControl(),
+            role: new FormControl(),
             skills: new FormGroup(
                 Object.fromEntries(
-                    Object.values(Skills).map((skill) => [
+                    Object.values(Skill).map((skill) => [
                         skill,
                         new FormControl(),
                     ])
@@ -26,8 +27,9 @@ export class CharacterForm extends FormGroup {
     private initialiseValues() {
         this.setValue({
             name: this._character.name,
+            role: this._character.role,
             skills: Object.fromEntries(
-                Object.values(Skills).map((skill) => [
+                Object.values(Skill).map((skill) => [
                     skill,
                     this._character.skills[skill],
                 ])
@@ -40,6 +42,10 @@ export class CharacterForm extends FormGroup {
     private subscribe() {
         this.controls['name'].valueChanges.subscribe(
             (value) => (this._character.name = value)
+        );
+
+        this.controls['role'].valueChanges.subscribe(
+            (value) => (this._character.role = value)
         );
 
         this.controls['skills'].valueChanges.subscribe(

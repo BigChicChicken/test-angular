@@ -1,7 +1,19 @@
-import { CharacterParseError } from '../../@errors/character-parse/character-parse.error';
 import { v4 as uuid } from 'uuid';
 
-export enum Skills {
+export enum Role {
+    Rockerboy = 'rockerboy',
+    Solo = 'solo',
+    Netrunner = 'netrunner',
+    Techie = 'techie',
+    Medtech = 'medtech',
+    Media = 'media',
+    Corporate = 'corporate',
+    Cop = 'cop',
+    Fixer = 'fixer',
+    Nomad = 'nomad',
+}
+
+export enum Skill {
     Intelligence = 'intelligence',
     Reflexes = 'reflexes',
     Dexterity = 'dexterity',
@@ -20,18 +32,18 @@ export class Character {
 
     constructor(
         private _name: string = '',
-        private _type: string = '',
-        private _skills: { [key in Skills]: number } = {
-            [Skills.Intelligence]: 2,
-            [Skills.Reflexes]: 2,
-            [Skills.Dexterity]: 2,
-            [Skills.Technique]: 2,
-            [Skills.Cool]: 2,
-            [Skills.Will]: 2,
-            [Skills.Luck]: 2,
-            [Skills.Movement]: 2,
-            [Skills.Body]: 2,
-            [Skills.Empathy]: 2,
+        private _role: Role = Role.Rockerboy,
+        private _skills: { [key in Skill]: number } = {
+            [Skill.Intelligence]: 2,
+            [Skill.Reflexes]: 2,
+            [Skill.Dexterity]: 2,
+            [Skill.Technique]: 2,
+            [Skill.Cool]: 2,
+            [Skill.Will]: 2,
+            [Skill.Luck]: 2,
+            [Skill.Movement]: 2,
+            [Skill.Body]: 2,
+            [Skill.Empathy]: 2,
         }
     ) {}
 
@@ -51,25 +63,19 @@ export class Character {
         this._name = name;
     }
 
+    get role(): Role {
+        return this._role;
+    }
+
+    set role(role: Role) {
+        this._role = role;
+    }
+
     get skills() {
         return this._skills;
     }
 
-    set skills(skills: { [key in Skills]: number }) {
+    set skills(skills: { [key in Skill]: number }) {
         this._skills = skills;
-    }
-
-    static fromJson(value: string): Character {
-        let data = [];
-        try {
-            data = JSON.parse(value);
-        } catch (error) {
-            throw new CharacterParseError(value);
-        }
-
-        const character = new Character(data?._name, data?._skills);
-        Object.assign(character, { _id: data?._id, _version: data?._version });
-
-        return character;
     }
 }
