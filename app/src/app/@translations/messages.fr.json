@@ -4,6 +4,8 @@
         "button.reset": "Réinitialisation",
         "character.editor.load": "Charger un personnage",
         "character.editor.name": "Nom",
+        "character.editor.random.edgerunner": "Mode EDGERUNNER",
+        "character.editor.random.streetrat": "Mode RAT DES RUES",
         "character.editor.role": "Rôle",
         "character.editor.submit": "Sauvegarde",
         "character.editor.title": "Créer votre personnage",

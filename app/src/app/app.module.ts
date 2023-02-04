@@ -14,6 +14,7 @@ import { TextInputComponent } from './@components/@inputs/text-input/text-input.
 import { TranslatorComponent } from './@components/translator/translator.component';
 import { SwitchLocaleComponent } from './@components/switch-locale/switch-locale.component';
 import { RoleListComponent } from './@components/@lists/role-list/role-list.component';
+import { ButtonComponent } from './@components/@buttons/button/button.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { RoleListComponent } from './@components/@lists/role-list/role-list.comp
         TranslatorComponent,
         SwitchLocaleComponent,
         RoleListComponent,
+        ButtonComponent,
     ],
     imports: [BrowserModule, FormsModule, ReactiveFormsModule],
     providers: [],

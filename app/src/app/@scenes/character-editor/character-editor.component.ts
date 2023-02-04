@@ -5,6 +5,10 @@ import {
     CharacterForm,
     defaultCharacter,
 } from '../../@forms/charater-form/character.form';
+import {
+    AutoSkillsMode,
+    AutoSkillsService,
+} from '../../@services/auto-skills/auto-skills.service';
 
 @Component({
     selector: 'app-character-editor',
@@ -14,7 +18,10 @@ export class CharacterEditorComponent {
     characterList: FormControl;
     characterForm: CharacterForm;
 
-    constructor(private characterStorageService: CharacterStorageService) {
+    constructor(
+        private characterStorage: CharacterStorageService,
+        private autoSkills: AutoSkillsService
+    ) {
         this.characterList = new FormControl();
         this.characterForm = new CharacterForm();
     }
@@ -25,7 +32,31 @@ export class CharacterEditorComponent {
         this.characterForm.character = value !== '' ? value : defaultCharacter;
     }
 
+    onStreetratClick() {
+        const { character } = this.characterForm;
+
+        this.characterForm.setValue({
+            ...this.characterForm.getRawValue(),
+            skills: this.autoSkills.generate(
+                character.role,
+                AutoSkillsMode.Streetrat
+            ),
+        });
+    }
+
+    onEdgerunnerClick() {
+        const { character } = this.characterForm;
+
+        this.characterForm.setValue({
+            ...this.characterForm.getRawValue(),
+            skills: this.autoSkills.generate(
+                character.role,
+                AutoSkillsMode.Edgerunner
+            ),
+        });
+    }
+
     onSubmit(): void {
-        this.characterStorageService.push(this.characterForm.character);
+        this.characterStorage.push(this.characterForm.character);
     }
 }

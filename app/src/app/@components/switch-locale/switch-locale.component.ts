@@ -17,15 +17,15 @@ import { LocaleStorageService } from '../../@services/@storages/locale-storage/l
 export class SwitchLocaleComponent implements OnInit {
     value = 'en';
 
-    constructor(private localeStorageService: LocaleStorageService) {}
+    constructor(private localeStorage: LocaleStorageService) {}
 
     ngOnInit() {
-        this.localeStorageService.subject.subscribe((value) => {
+        this.localeStorage.subject.subscribe((value) => {
             this.value = value;
         });
     }
 
     onChange({ target: { value } }: any) {
-        this.localeStorageService.value = value;
+        this.localeStorage.value = value;
     }
 }

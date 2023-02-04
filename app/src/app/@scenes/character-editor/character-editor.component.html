@@ -6,6 +6,12 @@
     <app-character-list [formControl]='characterList' id='load' i18n-label='@@character.editor.load' label='Load a character' (change)="loadCharacter()" />
 </div>
 
+<div class='flex justify-around gap-4 mb-10'>
+    <app-button type='button' i18n-label='@@character.editor.random.streetrat' label='Mode STREETRAT' (click)='onStreetratClick()'/>
+    <app-button type='button' i18n-label='@@character.editor.random.edgerunner' label='Mode EDGERUNNER' (click)='onEdgerunnerClick()'/>
+</div>
+
+
 <form class='flex flex-col gap-4' [formGroup]="characterForm" (ngSubmit)="onSubmit()">
     <app-text-input formControlName='name' id='name' i18n-label='@@character.editor.name' label='Name'/>
     <app-role-list formControlName='role' id='role' i18n-label='@@character.editor.role' label='Role' />

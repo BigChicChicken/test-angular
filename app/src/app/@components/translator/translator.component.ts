@@ -11,14 +11,14 @@ export class TranslatorComponent implements OnInit {
     translation = '';
 
     constructor(
-        private translatorService: TranslatorService,
-        private localeStorageService: LocaleStorageService
+        private translator: TranslatorService,
+        private localeStorage: LocaleStorageService
     ) {}
 
     ngOnInit(): void {
-        this.localeStorageService.subject.subscribe(() => {
+        this.localeStorage.subject.subscribe(() => {
             if (this.key) {
-                this.translation = this.translatorService.t(this.key);
+                this.translation = this.translator.t(this.key);
             }
         });
     }

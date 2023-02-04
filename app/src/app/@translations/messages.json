@@ -4,6 +4,8 @@
     "button.reset": "Reset",
     "character.editor.load": "Load a character",
     "character.editor.name": "Name",
+    "character.editor.random.edgerunner": "Mode EDGERUNNER",
+    "character.editor.random.streetrat": "Mode STREETRAT",
     "character.editor.role": "Role",
     "character.editor.submit": "Save",
     "character.editor.title": "Create your character",

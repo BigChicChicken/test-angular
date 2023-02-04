@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 import { Injectable } from '@angular/core';
-import { TranslatorMissingKeyError } from '../../@errors/translator-missing-key/translator-missing-key.error';
+import { TranslatorKeyMissingError } from '../../@errors/translator-key-missing/translator-key-missing.error';
 import { LocaleStorageService } from '../@storages/locale-storage/locale-storage.service';
 import messagesEN from '../../@translations/messages.json';
 import messagesFR from '../../@translations/messages.fr.json';
@@ -23,7 +23,7 @@ const normalizeResources = (translationFiles: {
                 translation: Object.fromEntries(
                     Object.keys(ref).map((key) => {
                         if (!Object.hasOwn(translations, key)) {
-                            throw new TranslatorMissingKeyError(key, locale);
+                            throw new TranslatorKeyMissingError(key, locale);
                         }
 
                         return [ref[key], translations[key]];
@@ -47,10 +47,10 @@ i18next
     providedIn: 'root',
 })
 export class TranslatorService {
-    constructor(private localeStorageService: LocaleStorageService) {
-        localeStorageService.subject.subscribe(() => {
+    constructor(private localeStorage: LocaleStorageService) {
+        localeStorage.subject.subscribe(() => {
             i18next
-                .changeLanguage(this.localeStorageService.value)
+                .changeLanguage(this.localeStorage.value)
                 .catch(console.error);
         });
     }

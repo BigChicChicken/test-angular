@@ -26,6 +26,8 @@ export enum Skill {
     Empathy = 'empathy',
 }
 
+export type Skills = { [key in Skill]: number };
+
 export class Character {
     private readonly _id: string = uuid();
     private readonly _version: string = '1.0';
@@ -33,7 +35,7 @@ export class Character {
     constructor(
         private _name: string = '',
         private _role: Role = Role.Rockerboy,
-        private _skills: { [key in Skill]: number } = {
+        private _skills: Skills = {
             [Skill.Intelligence]: 2,
             [Skill.Reflexes]: 2,
             [Skill.Dexterity]: 2,

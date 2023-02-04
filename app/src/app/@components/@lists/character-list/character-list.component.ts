@@ -47,10 +47,10 @@ export class CharacterListComponent
     onChange: any;
     onTouched: any;
 
-    constructor(private characterStorageService: CharacterStorageService) {}
+    constructor(private characterStorage: CharacterStorageService) {}
 
     ngOnInit(): void {
-        this.characterStorageService.subject
+        this.characterStorage.subject
             .pipe(map((storage) => Object.values(storage)))
             .subscribe((characters: Character[]) => {
                 this.characters = characters;
@@ -58,7 +58,7 @@ export class CharacterListComponent
     }
 
     ngOnDestroy(): void {
-        this.characterStorageService.subject.unsubscribe();
+        this.characterStorage.subject.unsubscribe();
     }
 
     registerOnChange(fn: any) {
