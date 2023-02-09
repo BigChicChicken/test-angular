@@ -6,10 +6,17 @@ export interface CharacterStorageInterface {
     [key: string]: Character;
 }
 
+export interface CharacterStorageServiceInterface {
+    subject: BehaviorSubject<CharacterStorageInterface>;
+    push: (character: Character) => void;
+}
+
 @Injectable({
     providedIn: 'root',
 })
-export class CharacterStorageService {
+export class CharacterStorageService
+    implements CharacterStorageServiceInterface
+{
     static STORAGE_KEY = 'CHARACTERS';
 
     private readonly _subject: BehaviorSubject<CharacterStorageInterface>;

@@ -1,10 +1,15 @@
-import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+
+export interface LocaleStorageServiceInterface {
+    subject: BehaviorSubject<string>;
+    value: string;
+}
 
 @Injectable({
     providedIn: 'root',
 })
-export class LocaleStorageService {
+export class LocaleStorageService implements LocaleStorageServiceInterface {
     static STORAGE_KEY = 'LOCALE';
 
     private readonly _subject: BehaviorSubject<string>;

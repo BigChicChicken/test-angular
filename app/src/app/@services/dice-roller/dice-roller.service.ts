@@ -1,15 +1,19 @@
-import { Injectable } from '@angular/core';
 import { DiceRollerMissingError } from '../../@errors/dice-roller-missing/dice-roller-missing.error';
+import { Injectable } from '@angular/core';
 
 export enum Dice {
     D6 = 'd6',
     D10 = 'd10',
 }
 
+export interface DiceRollerServiceInterface {
+    roll(dice: Dice): number;
+}
+
 @Injectable({
     providedIn: 'root',
 })
-export class DiceRollerService {
+export class DiceRollerService implements DiceRollerServiceInterface {
     roll(dice: Dice): number {
         switch (dice) {
             case Dice.D6:

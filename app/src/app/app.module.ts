@@ -16,6 +16,13 @@ import { SwitchLocaleComponent } from './@components/switch-locale/switch-locale
 import { RoleListComponent } from './@components/@lists/role-list/role-list.component';
 import { ButtonComponent } from './@components/@buttons/button/button.component';
 
+import { AutoSkillsService } from './@services/auto-skills/auto-skills.service';
+import { CharacterStorageService } from './@services/@storages/character-storage/character-storage.service';
+import { DiceRollerService } from './@services/dice-roller/dice-roller.service';
+import { LocaleStorageService } from './@services/@storages/locale-storage/locale-storage.service';
+import { PdfService } from './@services/pdf/pdf.service';
+import { TranslatorService } from './@services/translator/translator.service';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -32,7 +39,32 @@ import { ButtonComponent } from './@components/@buttons/button/button.component'
         ButtonComponent,
     ],
     imports: [BrowserModule, FormsModule, ReactiveFormsModule],
-    providers: [],
+    providers: [
+        {
+            provide: 'AutoSkillsServiceInterface',
+            useExisting: AutoSkillsService,
+        },
+        {
+            provide: 'CharacterStorageServiceInterface',
+            useExisting: CharacterStorageService,
+        },
+        {
+            provide: 'DiceRollerServiceInterface',
+            useExisting: DiceRollerService,
+        },
+        {
+            provide: 'LocaleStorageServiceInterface',
+            useExisting: LocaleStorageService,
+        },
+        {
+            provide: 'PdfServiceInterface',
+            useExisting: PdfService,
+        },
+        {
+            provide: 'TranslatorServiceInterface',
+            useExisting: TranslatorService,
+        },
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

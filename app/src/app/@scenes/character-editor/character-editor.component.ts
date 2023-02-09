@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { CharacterStorageService } from '../../@services/@storages/character-storage/character-storage.service';
+import { CharacterStorageServiceInterface } from '../../@services/@storages/character-storage/character-storage.service';
 import {
     CharacterForm,
     defaultCharacter,
 } from '../../@forms/charater-form/character.form';
 import {
     AutoSkillsMode,
-    AutoSkillsService,
+    AutoSkillsServiceInterface,
 } from '../../@services/auto-skills/auto-skills.service';
+import { PdfServiceInterface } from '../../@services/pdf/pdf.service';
 
 @Component({
     selector: 'app-character-editor',
@@ -19,8 +20,12 @@ export class CharacterEditorComponent {
     characterForm: CharacterForm;
 
     constructor(
-        private characterStorage: CharacterStorageService,
-        private autoSkills: AutoSkillsService
+        @Inject('CharacterStorageServiceInterface')
+        private characterStorage: CharacterStorageServiceInterface,
+        @Inject('AutoSkillsServiceInterface')
+        private autoSkills: AutoSkillsServiceInterface,
+        @Inject('PdfServiceInterface')
+        private pdf: PdfServiceInterface
     ) {
         this.characterList = new FormControl();
         this.characterForm = new CharacterForm();
@@ -58,5 +63,21 @@ export class CharacterEditorComponent {
 
     onSubmit(): void {
         this.characterStorage.push(this.characterForm.character);
+    }
+
+    onPdfClick(): void {
+        const { character } = this.characterForm;
+
+        this.pdf.download(
+            new URL(
+                './assets/pdf/character_sheet/character_sheet.fr.pdf',
+                document.baseURI
+            ),
+            character.name,
+            {
+                name: character.name,
+                role: character.role,
+            }
+        );
     }
 }

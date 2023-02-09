@@ -1,24 +1,27 @@
-import { Injectable } from '@angular/core';
 import { Role, Skill, Skills } from '../../@entities/character/character';
-import { Dice, DiceRollerService } from '../dice-roller/dice-roller.service';
+import {
+    Dice,
+    DiceRollerServiceInterface,
+} from '../dice-roller/dice-roller.service';
 import { MatrixMissingError } from '../../@errors/matrix-missing/matrix-missing.error';
-import RockerboyMatrix from './matrix/rockerboy.matrix.json';
-import SoloMatrix from './matrix/solo.matrix.json';
-import NetrunnerMatrix from './matrix/netrunner.matrix.json';
-import TechieMatrix from './matrix/techie.matrix.json';
-import MedtechMatrix from './matrix/medtech.matrix.json';
-import MediaMatrix from './matrix/media.matrix.json';
-import CorporateMatrix from './matrix/coporate.matrix.json';
-import CopMatrix from './matrix/cop.matrix.json';
-import FixerMatrix from './matrix/fixer.matrix.json';
-import NomadMatrix from './matrix/nomad.matrix.json';
+import RockerboyMatrix from './matrices/rockerboy.matrix.json';
+import SoloMatrix from './matrices/solo.matrix.json';
+import NetrunnerMatrix from './matrices/netrunner.matrix.json';
+import TechieMatrix from './matrices/techie.matrix.json';
+import MedtechMatrix from './matrices/medtech.matrix.json';
+import MediaMatrix from './matrices/media.matrix.json';
+import CorporateMatrix from './matrices/coporate.matrix.json';
+import CopMatrix from './matrices/cop.matrix.json';
+import FixerMatrix from './matrices/fixer.matrix.json';
+import NomadMatrix from './matrices/nomad.matrix.json';
+import { Inject, Injectable } from '@angular/core';
 
 export enum AutoSkillsMode {
     Streetrat = 'streetrat',
     Edgerunner = 'edgerunner',
 }
 
-const matrices = {
+const Matrices = {
     [Role.Rockerboy]: RockerboyMatrix,
     [Role.Solo]: SoloMatrix,
     [Role.Netrunner]: NetrunnerMatrix,
@@ -31,14 +34,21 @@ const matrices = {
     [Role.Nomad]: NomadMatrix,
 };
 
+export interface AutoSkillsServiceInterface {
+    generate(role: Role, mode: AutoSkillsMode): Skills;
+}
+
 @Injectable({
     providedIn: 'root',
 })
-export class AutoSkillsService {
-    constructor(private diceRoller: DiceRollerService) {}
+export class AutoSkillsService implements AutoSkillsServiceInterface {
+    constructor(
+        @Inject('DiceRollerServiceInterface')
+        private diceRoller: DiceRollerServiceInterface
+    ) {}
 
     generate(role: Role, mode: AutoSkillsMode): Skills {
-        if (!Object.hasOwn(matrices, role)) {
+        if (!Object.hasOwn(Matrices, role)) {
             throw new MatrixMissingError(role);
         }
 
@@ -48,14 +58,14 @@ export class AutoSkillsService {
                     Array.from(
                         { length: 10 },
                         (_, i) =>
-                            matrices[role][this.diceRoller.roll(Dice.D10) - 1][
+                            Matrices[role][this.diceRoller.roll(Dice.D10) - 1][
                                 i
                             ]
                     )
                 );
             case AutoSkillsMode.Edgerunner:
                 return this.convertArrayToSkills(
-                    matrices[role][this.diceRoller.roll(Dice.D10) - 1]
+                    Matrices[role][this.diceRoller.roll(Dice.D10) - 1]
                 );
         }
     }

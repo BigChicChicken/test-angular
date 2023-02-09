@@ -1,5 +1,12 @@
-import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { CharacterStorageService } from '../../../@services/@storages/character-storage/character-storage.service';
+import {
+    Component,
+    forwardRef,
+    Inject,
+    Input,
+    OnDestroy,
+    OnInit,
+} from '@angular/core';
+import { CharacterStorageServiceInterface } from '../../../@services/@storages/character-storage/character-storage.service';
 import { Character } from '../../../@entities/character/character';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { map } from 'rxjs';
@@ -47,7 +54,10 @@ export class CharacterListComponent
     onChange: any;
     onTouched: any;
 
-    constructor(private characterStorage: CharacterStorageService) {}
+    constructor(
+        @Inject('CharacterStorageServiceInterface')
+        private characterStorage: CharacterStorageServiceInterface
+    ) {}
 
     ngOnInit(): void {
         this.characterStorage.subject

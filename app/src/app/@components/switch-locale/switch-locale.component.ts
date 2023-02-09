@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { LocaleStorageService } from '../../@services/@storages/locale-storage/locale-storage.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { LocaleStorageServiceInterface } from '../../@services/@storages/locale-storage/locale-storage.service';
 
 @Component({
     selector: 'app-switch-locale',
@@ -17,7 +17,10 @@ import { LocaleStorageService } from '../../@services/@storages/locale-storage/l
 export class SwitchLocaleComponent implements OnInit {
     value = 'en';
 
-    constructor(private localeStorage: LocaleStorageService) {}
+    constructor(
+        @Inject('LocaleStorageServiceInterface')
+        private localeStorage: LocaleStorageServiceInterface
+    ) {}
 
     ngOnInit() {
         this.localeStorage.subject.subscribe((value) => {
