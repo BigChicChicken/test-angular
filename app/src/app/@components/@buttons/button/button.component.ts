@@ -4,8 +4,9 @@ import { Component, Input } from '@angular/core';
     selector: 'app-button',
     template: `
         <button
-            [type]="type"
-            class="bg-primary-dark text-primary uppercase border-2 border-primary px-2"
+            *ngIf="label"
+            [attr.type]="type"
+            class="bg-primary-dark text-primary uppercase border-2 border-primary px-2 active:text-secondary active:border-secondary"
         >
             <app-translator [key]="label" />
         </button>

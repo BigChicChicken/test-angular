@@ -24,6 +24,7 @@ export class SwitchLocaleComponent implements OnInit {
 
     ngOnInit() {
         this.localeStorage.subject.subscribe((value) => {
+            console.log(value);
             this.value = value;
         });
     }

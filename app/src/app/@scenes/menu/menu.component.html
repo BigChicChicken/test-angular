@@ -1,0 +1,16 @@
+<div class='grid grid-cols-[auto_auto]'>
+    <div [attr.class]='class'>
+        <div class='rtl bg-primary-dark border-r border-primary w-max h-screen overflow-auto pl-8 pr-12 py-8'>
+            <div class='ltr grid grid-cols-1 items-center gap-3'>
+                <app-nav-button i18n-label='@@game.tools.title' label='Game master tools' routerLink='/game/tools' />
+                <app-nav-button i18n-label='@@character.editor.title' label='Create your character' routerLink='/character/editor' />
+
+                <hr class='h-px bg-primary border-0' />
+
+                <app-switch-locale class='text-center' />
+            </div>
+        </div>
+    </div>
+
+    <app-menu-toggle />
+</div>

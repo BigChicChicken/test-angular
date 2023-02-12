@@ -5,11 +5,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     selector: 'app-text-input',
     template: `
         <div class="grid grid-rows-2 text-primary focus-within:text-secondary">
-            <label *ngIf="id && label" [for]="id">
+            <label *ngIf="label" [attr.for]="id">
                 <app-translator [key]="label" />
             </label>
             <input
-                [id]="id ?? ''"
+                [attr.id]="id"
                 type="text"
                 class="bg-primary-dark border-2 border-primary px-2 outline-none focus:border-secondary"
                 [ngModel]="input"
