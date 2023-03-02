@@ -3,7 +3,7 @@ import { TranslatorServiceInterface } from '../../@services/translator/translato
 import { LocaleStorageServiceInterface } from '../../@services/@storages/locale-storage/locale-storage.service';
 
 @Component({
-    selector: 'app-translator',
+    selector: 'app-translator[key]',
     template: `{{ translation }}`,
 })
 export class TranslatorComponent implements OnInit {

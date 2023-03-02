@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'app-nav-button',
+    selector: 'app-nav-button[label][routerLink]',
     template: `
         <a
             *ngIf="label"

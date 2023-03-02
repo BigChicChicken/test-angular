@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'app-button',
+    selector: 'app-button[type][label]',
     template: `
         <button
-            *ngIf="label"
             [attr.type]="type"
             class="bg-primary-dark text-primary uppercase border-2 border-primary px-2 active:text-secondary active:border-secondary"
         >
