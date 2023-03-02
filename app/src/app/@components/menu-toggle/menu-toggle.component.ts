@@ -21,7 +21,7 @@ import { MenuStorageServiceInterface } from '../../@services/@storages/menu-stor
     `,
 })
 export class MenuToggleComponent implements OnInit {
-    static DEFAULT_CLASS = 'transition-all duration-500 delay-100';
+    static DEFAULT_CLASS = 'transition-all duration-300';
 
     class = MenuToggleComponent.DEFAULT_CLASS;
     icon: IconDefinition = faBars;
